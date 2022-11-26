@@ -1,6 +1,13 @@
+![workflow](https://user-images.githubusercontent.com/8611608/204108531-22228164-e07b-41d0-a965-63f4cc55777d.png)
+
 # n8n-nodes-sonos
 
 This is the repository for the n8n sonos node.
+
+## Setup
+
+In order to use the Sonos node, you have to create a Sonos Developer Account and create a new Control Integration. The created credentials will be required for the creation of the n8n credential.
+![using-oauth](https://user-images.githubusercontent.com/8611608/204108609-140d3c9d-46a5-4009-bf88-275c711b45fe.gif)
 
 ## Running locally
 
