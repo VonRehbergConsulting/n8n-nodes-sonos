@@ -5,7 +5,7 @@
 			"es2019"
 		],
 		"types": [
-			"node",
+			"node", "jest",
 		],
 		"module": "commonjs",
 		"noImplicitAny": true,
@@ -26,5 +26,6 @@
 		"nodes/**/*",
 		"nodes/**/*.json",
 		"package.json",
+		"jest.config.ts"
 	],
 }
