@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-sonos",
   "version": "1.0.0",
-  "description": "",
+  "description": "The n8n sonos node allows users to control their sonos system using n8n automation workflows.",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -33,14 +33,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/SonosApi.credentials.js",
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/SonosOAuth2Api.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Sonos/Sonos.node.js",
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/Sonos/Sonos.node.js"
     ]
   },
   "devDependencies": {

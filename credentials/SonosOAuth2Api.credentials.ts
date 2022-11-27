@@ -1,9 +1,9 @@
 import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
-export class SonosApi implements ICredentialType {
-	name = 'sonosApi';
+export class SonosOAuth2Api implements ICredentialType {
+	name = 'sonosOAuth2Api';
 	extends = ['oAuth2Api'];
-	displayName = 'Sonos API';
+	displayName = 'Sonos OAuth2 API';
 	icon = 'file:Sonos.svg';
 	properties: INodeProperties[] = [
 		{

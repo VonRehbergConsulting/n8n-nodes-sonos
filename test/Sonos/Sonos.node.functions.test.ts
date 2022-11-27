@@ -12,7 +12,7 @@ import { IExecuteFunctions, ILoadOptionsFunctions } from 'n8n-core';
 import { ICredentialDataDecryptedObject, INodeParameters } from 'n8n-workflow';
 import { INodeExecutionData, INodeType } from 'n8n-workflow/dist';
 import { Sonos } from '../../nodes/Sonos/Sonos.node';
-import { SonosApi } from '../../credentials/SonosApi.credentials';
+import { SonosOAuth2Api } from '../../credentials/SonosOAuth2Api.credentials';
 
 const readFileAsync = promisify(readFile);
 
@@ -37,10 +37,10 @@ describe('Sonos Node', () => {
 				{json: jsonData},
 			] as INodeExecutionData[];
 		}
-		credentials.set('sonosApi', {});
+		credentials.set('sonosOAuth2Api', {});
 		node = new Sonos();
 
-		new SonosApi();
+		new SonosOAuth2Api();
 	});
 	describe('Configuration', () => {
 		it('Fetches households', async () => {

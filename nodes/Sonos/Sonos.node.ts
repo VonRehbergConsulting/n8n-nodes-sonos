@@ -34,7 +34,7 @@ export class Sonos implements INodeType {
 		outputs: ['main'],
 		credentials: [
 			{
-				name: 'sonosApi',
+				name: 'sonosOAuth2Api',
 				required: true,
 			},
 		],
@@ -216,7 +216,7 @@ export class Sonos implements INodeType {
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const credentials = this.getCredentials('sonosApi');
+		const credentials = this.getCredentials('sonosOAuth2Api');
 		const returnData: IDataObject[] = [];
 		try {
 			if (credentials === undefined) {
