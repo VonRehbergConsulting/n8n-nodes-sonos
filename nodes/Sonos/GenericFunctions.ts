@@ -6,7 +6,7 @@ interface SonosItem {
 	id: string;
 	name?: string;
 	description?: string;
-	capabilities: string[],
+	capabilities: string[];
 }
 
 interface SonosResponse {

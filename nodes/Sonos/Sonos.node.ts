@@ -310,7 +310,7 @@ export class Sonos implements INodeType {
 					await setTVPowerState.call(this);
 					break;
 				case 'loadHomeTheaterPlayback':
-					await loadHomeTheaterPlayback.call(this)
+					await loadHomeTheaterPlayback.call(this);
 					break;
 				case 'setHomeTheaterOptions':
 					await setHomeTheaterOptions.call(this);
