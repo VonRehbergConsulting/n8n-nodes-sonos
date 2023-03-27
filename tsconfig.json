@@ -16,7 +16,6 @@
 		"resolveJsonModule": true,
 		"declaration": true,
 		"outDir": "./dist/",
-		"rootDir": "./",
 		"target": "es2019",
 		"sourceMap": true,
 		"esModuleInterop": true,
