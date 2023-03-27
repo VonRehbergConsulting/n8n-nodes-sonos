@@ -12,11 +12,14 @@ import {
 	executeGroupAction,
 	groupAll,
 	loadFavorites,
+	loadHomeTheaterPlayback,
 	loadHouseholds,
 	loadPlayers,
 	playAudioClip,
 	playFavorite,
 	setGroupVolume,
+	setHomeTheaterOptions,
+	setTVPowerState,
 } from './GenericFunctions';
 
 export class Sonos implements INodeType {
@@ -101,6 +104,21 @@ export class Sonos implements INodeType {
 						value: 'groupVolume',
 						description: 'Sets the volume of the first group in your system',
 					},
+					{
+						name: 'Set Home Theater Options',
+						value: 'setHomeTheaterOptions',
+						description: 'Sets the options of your home theater like night mode or enhance dialog',
+					},
+					{
+						name: 'Start Home Theater Playback',
+						value: 'loadHomeTheaterPlayback',
+						description: 'Starts the home theater playback',
+					},
+					{
+						name: 'Set TV Power State',
+						value: 'setTVPowerState',
+						description: 'Sets the TV power state',
+					},
 				],
 				default: '',
 				required: true,
@@ -114,12 +132,12 @@ export class Sonos implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						action: ['playAudioClip'],
+						action: ['playAudioClip', 'setHomeTheaterOptions', 'loadHomeTheaterPlayback', 'setTVPowerState'],
 					},
 				},
 				typeOptions: {
 					loadOptionsMethod: 'loadPlayers',
-					loadOptionsDependsOn: ['household'],
+					loadOptionsDependsOn: ['household', 'action'],
 				},
 			},
 			{
@@ -204,6 +222,51 @@ export class Sonos implements INodeType {
 					},
 				},
 			},
+			{
+				displayName: 'Crossfade',
+				name: 'crossfade',
+				type: 'boolean' as NodePropertyTypes,
+				default: true,
+				required: true,
+				displayOptions: {
+					show: {
+						action: ['playFavorite'],
+					},
+				},
+			},
+			{
+				displayName: 'Night Mode',
+				name: 'nightMode',
+				type: 'boolean' as NodePropertyTypes,
+				default: false,
+				displayOptions: {
+					show: {
+						action: ['setHomeTheaterOptions'],
+					},
+				},
+			},
+			{
+				displayName: 'Enhance Dialog',
+				name: 'enhanceDialog',
+				type: 'boolean' as NodePropertyTypes,
+				default: false,
+				displayOptions: {
+					show: {
+						action: ['setHomeTheaterOptions'],
+					},
+				},
+			},
+			{
+				displayName: 'Power State',
+				name: 'tvPowerState',
+				type: 'boolean' as NodePropertyTypes,
+				default: false,
+				displayOptions: {
+					show: {
+						action: ['setTVPowerState'],
+					},
+				},
+			},
 		],
 	};
 
@@ -242,6 +305,15 @@ export class Sonos implements INodeType {
 					break;
 				case 'groupVolume':
 					await setGroupVolume.call(this);
+					break;
+				case 'setTVPowerState':
+					await setTVPowerState.call(this);
+					break;
+				case 'loadHomeTheaterPlayback':
+					await loadHomeTheaterPlayback.call(this);
+					break;
+				case 'setHomeTheaterOptions':
+					await setHomeTheaterOptions.call(this);
 					break;
 				default:
 					throw new NodeOperationError(this.getNode(), 'Unknown method or not implemented');

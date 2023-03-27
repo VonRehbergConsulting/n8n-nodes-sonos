@@ -6,6 +6,7 @@ interface SonosItem {
 	id: string;
 	name?: string;
 	description?: string;
+	capabilities: string[];
 }
 
 interface SonosResponse {
@@ -131,6 +132,7 @@ export async function loadPlayers(
 	this: ILoadOptionsFunctions | IExecuteFunctions,
 ): Promise<INodePropertyOptions[]> {
 	const returnData: INodePropertyOptions[] = [];
+	const action = this.getNodeParameter('action', 0);
 
 	let data;
 	try {
@@ -144,10 +146,26 @@ export async function loadPlayers(
 	}
 
 	for (const player of data.players!) {
-		returnData.push({
-			name: player.name as string,
-			value: player.id as string,
-		});
+		if (action === 'setHomeTheaterOptions' || action === 'loadHomeTheaterPlayback') {
+			if (player.capabilities.includes('HT_PLAYBACK')) {
+				returnData.push({
+					name: player.name as string,
+					value: player.id as string,
+				});
+			}
+		} else if (action === 'setTVPowerState') {
+			if (player.capabilities.includes('HT_POWER_STATE')) {
+				returnData.push({
+					name: player.name as string,
+					value: player.id as string,
+				});
+			}
+		} else {
+			returnData.push({
+				name: player.name as string,
+				value: player.id as string,
+			});
+		}
 	}
 	return returnData;
 }
@@ -214,4 +232,50 @@ export async function loadFavorites(this: ILoadOptionsFunctions): Promise<INodeP
 		});
 	}
 	return returnData;
+}
+
+export async function setTVPowerState(this: IExecuteFunctions): Promise<void> {
+	const player = this.getNodeParameter('player', 0);
+	const tvPowerState = this.getNodeParameter('tvPowerState', 0);
+	const options: OptionsWithUri = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			tvPowerState: tvPowerState ? 'ON' : 'STANDBY',
+		}),
+		uri: 'https://api.ws.sonos.com/control/api/v1/players/' + player + '/homeTheater/tvPowerState',
+	};
+	await this.helpers.requestOAuth2.call(this, 'sonosOAuth2Api', options);
+}
+
+export async function loadHomeTheaterPlayback(this: IExecuteFunctions): Promise<void> {
+	const player = this.getNodeParameter('player', 0);
+	const options: OptionsWithUri = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		uri: 'https://api.ws.sonos.com/control/api/v1/players/' + player + '/homeTheater',
+	};
+	await this.helpers.requestOAuth2.call(this, 'sonosOAuth2Api', options);
+}
+
+export async function setHomeTheaterOptions(this: IExecuteFunctions): Promise<void> {
+	const player = this.getNodeParameter('player', 0);
+	const nightMode = this.getNodeParameter('nightMode', 0);
+	const enhanceDialog = this.getNodeParameter('enhanceDialog', 0);
+	const options: OptionsWithUri = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		method: 'POST',
+		body: JSON.stringify({
+			enhanceDialog,
+			nightMode,
+		}),
+		uri: 'https://api.ws.sonos.com/control/api/v1/players/' + player + '/homeTheater/options',
+	};
+	await this.helpers.requestOAuth2.call(this, 'sonosOAuth2Api', options);
 }
