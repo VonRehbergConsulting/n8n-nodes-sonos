@@ -45,6 +45,53 @@
             "deviceIds": [
                 "RINCON_1234567_1"
             ]
+        },
+        {
+            "id": "RINCON_1234568",
+            "name": "Hometheater Beam",
+            "websocketUrl": "wss://192.168.188.57:1443/websocket/api",
+            "softwareVersion": "72.2-39150",
+            "apiVersion": "1.33.2",
+            "minApiVersion": "1.1.0",
+            "isUnregistered": false,
+            "capabilities": [
+                "CLOUD",
+                "HT_PLAYBACK",
+                "PLAYBACK",
+                "AIRPLAY",
+                "VOICE",
+                "AUDIO_CLIP"
+            ],
+            "deviceIds": [
+                "RINCON_1234568_1",
+                "RINCON_1234568_2",
+                "RINCON_1234568_3",
+                "RINCON_1234568_4"
+            ]
+        },
+        {
+            "id": "RINCON_1234569",
+            "name": "Hometheater Arc",
+            "websocketUrl": "wss://192.168.188.57:1443/websocket/api",
+            "softwareVersion": "72.2-39150",
+            "apiVersion": "1.33.2",
+            "minApiVersion": "1.1.0",
+            "isUnregistered": false,
+            "capabilities": [
+                "CLOUD",
+                "HT_PLAYBACK",
+                "PLAYBACK",
+                "HT_POWER_STATE",
+                "AIRPLAY",
+                "VOICE",
+                "AUDIO_CLIP"
+            ],
+            "deviceIds": [
+                "RINCON_1234569_1",
+                "RINCON_1234569_2",
+                "RINCON_1234569_3",
+                "RINCON_1234569_4"
+            ]
         }
     ],
     "partial": false
