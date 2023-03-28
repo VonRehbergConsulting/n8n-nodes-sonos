@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-sonos",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "The n8n sonos node allows users to control their sonos system using n8n automation workflows.",
   "keywords": [
     "n8n-community-node-package"
